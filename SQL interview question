@@ -2,3 +2,50 @@ SQL interview question
 
 1 return students names whose friends are earning more salary than them
 DROP TABLE IF EXISTS students;DROP TABLE IF EXISTS friends;DROP TABLE IF EXISTS packages;CREATE TABLE students (    id INT,    name VARCHAR(10));CREATE TABLE friends (    id INT,    friend_id INT);CREATE TABLE packages (    id INT,    salary FLOAT);INSERT INTO students VALUES(1, 'Mahi'),(2, 'Mahendra'),(3, 'Paresh'),(4, 'Sam'),(5, 'Rajesh');INSERT INTO friends VALUES(1, 2),(2, 4),(3, 5),(4, 1),(5, 3);INSERT INTO packages VALUES(1, 12.5),(2, 9.6),(3, 16.2),(4, 8.4),(5, 10.8);WITH cte AS (    SELECT p.id AS student_id, f.friend_id, p.salary AS student_salary     FROM packages p     JOIN friends f ON p.id = f.id),cte2 AS (    SELECT cte.student_id, cte.friend_id, cte.student_salary, c1.salary AS friend_salary     FROM cte     JOIN packages c1 ON cte.friend_id = c1.id)SELECT s.name AS student_name, s2.name AS friend_name, c2.student_salary, c2.friend_salaryFROM cte2 c2JOIN students s ON c2.student_id = s.id JOIN students s2 ON c2.friend_id = s2.idWHERE c2.friend_salary > c2.student_salary;
+
+2 Give mean, median , mode
+
+
+-- Create the numbers table
+create table numbers (
+    id int primary key,
+    num int
+);
+
+-- Insert data into the numbers table
+insert into numbers values 
+(1, 3), (2, 8), (3, 2),
+(4, 10), (5, 14), (6, 3), (7, 20), (8, 15),
+(9, 4), (10, 8), (11, 6), (12, 3), (13, 10),
+(14, 22), (15, 3), (16, 8);
+
+-- Display all data from numbers
+select * from numbers;
+
+-- Mean calculation using sum and count
+select sum(num)/count(num) as mean_of_numbers from numbers;
+
+-- Mean calculation using avg() function
+select avg(num) as mean from numbers;
+
+-- Mode calculation (most frequent number)
+select num 
+from (
+    select top 1 num, count(*) as number_of_times 
+    from numbers 
+    group by num 
+    order by number_of_times desc
+) a;
+
+-- Median calculation
+with cte as (
+    select num, 
+           row_number() over(order by num desc) as rn, 
+           count(*) over() as total_count 
+    from numbers
+)
+select top 1 case 
+    when total_count % 2 != 0 
+    then (select num from cte where rn = (total_count + 1) / 2)
+    else (select avg(num) from cte where rn in (total_count / 2, total_count / 2 + 1))
+end as median from cte;
