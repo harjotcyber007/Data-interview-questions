@@ -72,4 +72,36 @@ Permutation vs Combination. Write out both formulas.
 Parametric vs Non-Parametric.
 Explain Chi-square test.
 Why do we divide sample variance by n-1?
-How would you determine if males and females have different heigh
+How would you determine if males and females have different height
+
+**Question 3 - Given the table users:**
+Table "users"        
+Column	Type
+id	integer
+username	character
+email	character
+city	character
+state	character
+zip	integer
+active	boolean
+construct a query to find the top 5 states with the highest number of active users. Include the number for each state in the query result. 
+Example result:
+
+state	num_active_users
+New Mexico	502
+Alabama	495
+California	300
+Maine	201
+Texas	189
+The following SQL command will do the intended:
+
+**Question 5 - What are underfitting and overfitting
+**in the context of Machine Learning? How might you balance them?
+
+Overfitting happens when a model learns the detail and noise in the training data to the extent that it negatively impacts the performance of the model on new data. This means that the noise or random fluctuations in the training data is picked up and learned as concepts by the model. Underfitting refers to a model that can neither model the training data nor generalize to new data. An underfit machine learning model is not a suitable model and will be obvious as it will have poor performance on the training data. Ideally we will want a sweet spot between underfitting and overfitting. So you want the machine to learn the traning set rather well, but not too much that it will not be able to adapt to new sets positevely.
+
+select state, count(id) as num_active_users from users
+where active = 1
+group by state
+order by num_active_users desc
+limit 5
