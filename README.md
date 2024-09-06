@@ -1,6 +1,7 @@
 # Data-interview-questions
 
 Questions
+
 If you’re currently employed, why you don’t you like your current job? If you’re not, what are some of the ideal aspects you’re looking for in a data science or data analyst job? What specifically excites you and why do you want to do it?
 Out of all of your data analyst projects what was the one you're most proud of and why?
 Have you ever found an analysis that was the opposite of what you were hoping for? If not, suppose you performed an analysis where a client was hoping for one outcome, but in fact you got the opposite of what they were hoping it would show? How did you or would you handle this?
