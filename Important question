@@ -1,0 +1,10 @@
+HOw we auto update data in Power BI report
+
+we update daet on report and report will auto reflect on it.
+data integrity and data cleaniness is important to not to tamper reports.
+Process is same in both power bi and tableau , i did on power bi, first click on reprot, we can also see dataset along side it.
+We have otion of action in which we we see refresh file, but it denies due to gateway error.
+we have to download gateway in gateway connection option
+that gateway establish connection in dataset stored in local or cloud with power BI service.
+after setting up gateway, click on refresh button on main report to check changes.
+we can setup auto refresh at given time inb settings
